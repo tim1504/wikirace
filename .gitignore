@@ -1,2 +1,7 @@
 .DS_STORE
 /data
+
+
+# Added by cargo
+
+/target
