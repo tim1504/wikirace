@@ -1,6 +1,6 @@
 .DS_STORE
-/data
-
+/src/data/
+/databases
 
 # Added by cargo
 
