@@ -1,3 +1,5 @@
+mod shortest_path;
+
 use std::time::Instant;
 use rocket::serde::json::{json, Value};
 
@@ -7,12 +9,21 @@ extern crate rocket;
 #[get("/<start>/<end>")]
 fn search(start: String, end: String) -> Value {
     let t = Instant::now();
-    // TODO: Implement search
-    json!({
-        "start": start,
-        "end": end,
-        "time": t.elapsed().as_millis()
-    })
+    let r = shortest_path::find_shortest_path(start, end);
+    match r {
+        Ok(path) => {
+            return json!({
+                "path": path,
+                "time": t.elapsed().as_millis()
+            })
+        },
+        Err(e) => {
+            return json!({
+                "error": e,
+                "time": t.elapsed().as_millis()
+            })
+        }
+    }
 }
 
 #[catch(404)]
