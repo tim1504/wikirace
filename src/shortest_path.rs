@@ -19,12 +19,12 @@ pub fn find_shortest_path(start: String, end: String, graph: &Graph) -> Result<V
     }
 
     let mut queue = VecDeque::new();
-    queue.push_back((start_id, false));
-    queue.push_back((end_id, true));
+    queue.push_back((start_id, true));
+    queue.push_back((end_id, false));
 
     let mut visited = HashMap::new();
-    visited.insert(start_id, (start_id, false));
-    visited.insert(end_id, (end_id, true));
+    visited.insert(start_id, (start_id, true));
+    visited.insert(end_id, (end_id, false));
 
     // Bidirectional Breadth First Search.
     while let Some((c, d)) = queue.pop_front() {
