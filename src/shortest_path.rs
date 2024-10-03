@@ -26,8 +26,14 @@ pub fn find_shortest_path(start: String, end: String, graph: &Graph) -> Result<V
     visited.insert(start_id, (start_id, true));
     visited.insert(end_id, (end_id, false));
 
+    let mut i = 0;
+
     // Bidirectional Breadth First Search.
     while let Some((c, d)) = queue.pop_front() {
+        i += 1;
+        if i > 100000 {
+            return Err("Search limit exceeded".to_string());
+        }
         let edges = graph.get_edges(&c, d);
         for e in edges {
             if visited.contains_key(&e) {
